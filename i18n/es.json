@@ -1,0 +1,26 @@
+{
+    "app_name" : "WeatherAware",
+
+    "screen_home" : "Inicio",
+    "screen_error" : "Error",
+
+    "action_yes" : "Sí",
+    "action_no" : "No",
+    "action_forecast" : "Ver previsión 24h",
+
+    "error_no_data" : "No se han encontrado datos",
+
+    "msg_select_location" : "Selecciona una ciudad:",
+    "msg_feels_like" : "Sensación de",
+    "msg_pick_another" : "Selecciona otra ciudad:",
+
+    "label_more_info" : "Más datos",
+    "label_temp" : "Temperatura",
+    "label_min_temp" : "Temperatura min.:",
+    "label_max_temp" : "Temperatura max.:",
+    "label_wind" : "Viento",
+    "label_speed" : "Velocidad:",
+    "label_deg" : "Deg:",
+    "label_pressure" : "Presión:",
+    "label_humidity" : "Humedad:"
+}
