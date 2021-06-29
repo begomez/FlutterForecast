@@ -13,7 +13,8 @@ class WeatherOverviewCardWidget extends BaseStatelessWidget {
   final ISOCityModel place;
   final ForecastModel forecast;
 
-  const WeatherOverviewCardWidget(this.place, this.forecast, {Key key}) : super();
+  const WeatherOverviewCardWidget(this.place, this.forecast, {Key key})
+      : super();
 
   @override
   Widget buildWidgetContents(BuildContext context) {
@@ -21,15 +22,20 @@ class WeatherOverviewCardWidget extends BaseStatelessWidget {
       elevation: _Dimens.ELEVATION,
       child: Container(
         alignment: Alignment.topCenter,
-        margin: EdgeInsets.symmetric(vertical: _Dimens.SMALL_SPACING, horizontal: _Dimens.MID_SPACING),
+        margin: EdgeInsets.symmetric(
+            vertical: _Dimens.SMALL_SPACING, horizontal: _Dimens.MID_SPACING),
         padding: EdgeInsets.all(_Dimens.MID_SPACING),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(child: WeatherTemperatureCardWidget(name: this.place.name, summary: this.forecast.summary)),
-            Flexible(child: WeatherDescriptionCardWidget(weather: this.forecast.weather))
+            Flexible(
+                child: WeatherTemperatureCardWidget(
+                    name: this.place.name, summary: this.forecast.summary)),
+            Flexible(
+                child: WeatherDescriptionCardWidget(
+                    weather: this.forecast.weather))
           ],
         ),
       ),
@@ -45,7 +51,13 @@ class WeatherTemperatureCardWidget extends BaseStatelessWidget {
   final ForecastSummaryModel summary;
   final bool showCity;
 
-  const WeatherTemperatureCardWidget({@required this.name, @required this.summary, this.showCity = true, Key key}) : assert(summary != null), super(key: key);
+  const WeatherTemperatureCardWidget(
+      {@required this.name,
+      @required this.summary,
+      this.showCity = true,
+      Key key})
+      : assert(summary != null),
+        super(key: key);
 
   @override
   Widget buildWidgetContents(BuildContext context) {
@@ -87,7 +99,9 @@ class WeatherTemperatureCardWidget extends BaseStatelessWidget {
 class WeatherDescriptionCardWidget extends StatelessWidget {
   final WeatherModel weather;
 
-  const WeatherDescriptionCardWidget({@required this.weather, Key key}) : assert(weather != null), super(key: key);
+  const WeatherDescriptionCardWidget({@required this.weather, Key key})
+      : assert(weather != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +117,12 @@ class WeatherDescriptionCardWidget extends StatelessWidget {
   }
 
   Widget _buildCardDescrip(BuildContext cntxt) {
-    return RichText(textAlign: TextAlign.right, text: TextSpan(text: this.weather.description.toUpperCase(), style: AppStyles.subtitle,));
+    return RichText(
+        textAlign: TextAlign.right,
+        text: TextSpan(
+          text: this.weather.description.toUpperCase(),
+          style: AppStyles.subtitle,
+        ));
   }
 
   Widget _buildCardIcon(BuildContext cntxt) {
@@ -133,7 +152,10 @@ class WeatherWindCardWidget extends BaseStatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(AppLocalizations.of(context).translate("label_wind"), style: AppStyles.title,),
+              Text(
+                AppLocalizations.of(context).translate("label_wind"),
+                style: AppStyles.title,
+              ),
               this._buildSpeed(context),
               this._buildDeg(context),
             ],
@@ -143,7 +165,6 @@ class WeatherWindCardWidget extends BaseStatelessWidget {
 
   Widget _buildSpeed(BuildContext context) {
     return _buildKeyValueRow(context, "label_speed", this.wind.speed);
-
   }
 
   Widget _buildDeg(BuildContext context) {
@@ -172,31 +193,36 @@ class WeatherPressureCardWidget extends BaseStatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(AppLocalizations.of(context).translate("label_more_info"), style: AppStyles.title,),
-              _buildKeyValueRow(context, "label_pressure", this.summary.pressure.toDouble()),
-              _buildKeyValueRow(context, "label_humid", this.summary.humid.toDouble()),
+              Text(
+                AppLocalizations.of(context).translate("label_more_info"),
+                style: AppStyles.title,
+              ),
+              _buildKeyValueRow(
+                  context, "label_pressure", this.summary.pressure.toDouble()),
+              _buildKeyValueRow(
+                  context, "label_humid", this.summary.humid.toDouble()),
             ],
           ),
         ));
   }
-
-
 }
 
 Widget _buildKeyValueRow(BuildContext context, String label, double value) {
   return Padding(
     padding: EdgeInsets.only(left: _Dimens.MID_SPACING),
-    child: RichText(text: TextSpan(
-      children: [
-        TextSpan(text: AppLocalizations.of(context).translate(label), style: AppStyles.subtitle),
-        TextSpan(text: ": "),
-        TextSpan(text: value.toString(), style: AppStyles.body)
-      ],
-    ),),
+    child: RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+              text: AppLocalizations.of(context).translate(label),
+              style: AppStyles.subtitle),
+          TextSpan(text: ": "),
+          TextSpan(text: value.toString(), style: AppStyles.body)
+        ],
+      ),
+    ),
   );
 }
-
-
 
 abstract class _Dimens {
   static const double ELEVATION = 10.0;

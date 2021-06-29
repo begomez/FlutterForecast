@@ -5,10 +5,10 @@ abstract class AppDateUtils {
 
   static int nowInMillis() => DateTime.now().millisecondsSinceEpoch;
 
-  static int nowInSecs() => (nowInMillis() / MILIS_PER_SEC).toInt();
+  static int nowInSecs() => (nowInMillis() ~/ MILIS_PER_SEC);
 
-  static String millisToHH(int milis) {
-    var format =[HH, ':', '00'];
+  static String millisToHHStr(int milis) {
+    var format = [HH, ':', '00'];
 
     return formatDate(DateTime.fromMillisecondsSinceEpoch(milis), format);
   }

@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -8,15 +7,14 @@ class ForecastAnimationWidget extends StatefulWidget {
   final int pos;
   final ForecastModel forecast;
 
-  
   const ForecastAnimationWidget(this.pos, this.forecast) : super();
 
-  _ForecastAnimationWidgetState createState() => _ForecastAnimationWidgetState();
+  _ForecastAnimationWidgetState createState() =>
+      _ForecastAnimationWidgetState();
 }
 
 class _ForecastAnimationWidgetState extends State<ForecastAnimationWidget> {
   _ForecastAnimationWidgetState() : super();
-
 
   @override
   void didChangeDependencies() {
@@ -40,23 +38,20 @@ class _ForecastAnimationWidgetState extends State<ForecastAnimationWidget> {
         width: double.maxFinite,
         color: Colors.grey.withOpacity(min(1.0, COLOR_STEP * this.widget.pos)),
         height: MediaQuery.of(cntxt).size.height / 3,
-        child: Stack(
-            children: [
-              AnimatedPositioned(
-                  width: _Dimens.CONTAINER_SIZE,
-                  height: _Dimens.CONTAINER_SIZE,
-                  top: this.widget.pos * INITIAL_OFFSET,
-                  duration: Duration(seconds: ANIM_DURATION_IN_SECS),
-                  child: this._buildStar(cntxt)
-              )
-            ]
-        )
-    );
+        child: Stack(children: [
+          AnimatedPositioned(
+              width: _Dimens.CONTAINER_SIZE,
+              height: _Dimens.CONTAINER_SIZE,
+              top: this.widget.pos * INITIAL_OFFSET,
+              duration: Duration(seconds: ANIM_DURATION_IN_SECS),
+              child: this._buildStar(cntxt))
+        ]));
   }
 
   Widget _buildStar(BuildContext cntxt) => Container(
       width: _Dimens.CONTAINER_SIZE,
-      height: _Dimens.CONTAINER_SIZE, decoration: BoxDecoration(color: Colors.yellow, shape: BoxShape.circle));
+      height: _Dimens.CONTAINER_SIZE,
+      decoration: BoxDecoration(color: Colors.yellow, shape: BoxShape.circle));
 }
 
 abstract class _Dimens {

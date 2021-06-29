@@ -7,7 +7,7 @@ import 'package:flutter_template/presentation/widgets/forecast/ForecastAnimation
 import 'package:flutter_template/presentation/widgets/forecast/ForecastTabWidget.dart';
 
 /**
- * Screen that displays forecast info grouped into 4-hour chunks
+ * Screen that displays forecast info grouped into 3-hour chunks
  */
 class ForecastScreen extends BaseStatefulScreen {
   final ISOCityModel place;

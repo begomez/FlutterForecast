@@ -3,10 +3,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'WeatherModel.g.dart';
 
+/**
+ * Model for mapping in OpenWeather api
+ */
 @JsonSerializable(explicitToJson: true)
 class WeatherModel extends BaseModel {
   static const ICON_PLACEHOLDER = "{{icon}}";
-  static const String BASE_URL = "https://openweathermap.org/img/wn/$ICON_PLACEHOLDER.png";
+  static const String BASE_URL =
+      "https://openweathermap.org/img/wn/$ICON_PLACEHOLDER.png";
 
   @JsonKey(name: "id")
   final int id;
@@ -28,7 +32,8 @@ class WeatherModel extends BaseModel {
 
   bool hasIcon() => this.icon.isNotEmpty;
 
-  String toImg() => this.hasIcon()? BASE_URL.replaceAll(ICON_PLACEHOLDER, this.icon) : "";
+  String toImg() =>
+      this.hasIcon() ? BASE_URL.replaceAll(ICON_PLACEHOLDER, this.icon) : "";
 
   @override
   bool validate() {

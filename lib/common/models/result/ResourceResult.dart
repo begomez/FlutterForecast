@@ -1,4 +1,5 @@
 import 'package:flutter_template/common/models/ErrorModel.dart';
+import 'package:flutter_template/common/models/core/BaseModel.dart';
 
 /**
  * Enum with possible result states
@@ -6,14 +7,17 @@ import 'package:flutter_template/common/models/ErrorModel.dart';
 enum ResourceState { INITIAL, LOADING, SUCCESS, ERROR }
 
 /**
- * Wrapper around a result (data or error)
+ * Wrapper around a result (which can be some data or an error)
+ * Generic class receiving:
+ * - TargetData: data model contained in the result obj
  */
-class ResourceResult<T> {
-  final T data;
+class ResourceResult<TargetData extends BaseModel> {
+  final TargetData data;
   final ErrorModel error;
-  ResourceState state;
+  ResourceState resState;
 
-  ResourceResult({this.data, this.error, this.state = ResourceState.INITIAL});
+  ResourceResult(
+      {this.data, this.error, this.resState = ResourceState.INITIAL});
 
   bool hasData() => this.data != null;
 
@@ -27,7 +31,7 @@ class ResourceResult<T> {
 
   bool isSuccess() => this._isSomeState(ResourceState.SUCCESS);
 
-  bool _isSomeState(ResourceState target) => this.state == target;
+  bool _isSomeState(ResourceState target) => (this.resState == target);
 
-  void setState(ResourceState state) => this.state = state;
+  void setResultState(ResourceState state) => this.resState = state;
 }

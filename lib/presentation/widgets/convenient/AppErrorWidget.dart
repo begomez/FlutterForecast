@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/models/ErrorModel.dart';
 import 'package:flutter_template/presentation/utils/AppLocalizations.dart';
 import 'package:flutter_template/presentation/widgets/base/BaseStatelessWidget.dart';
 
@@ -6,7 +7,9 @@ import 'package:flutter_template/presentation/widgets/base/BaseStatelessWidget.d
  * Widget displayed when error
  */
 class AppErrorWidget extends BaseStatelessWidget {
-  const AppErrorWidget({Key key}) : super(key: key);
+  final ErrorModel err;
+
+  const AppErrorWidget({this.err, Key key}) : super(key: key);
 
   @override
   Widget buildWidgetContents(BuildContext context) {

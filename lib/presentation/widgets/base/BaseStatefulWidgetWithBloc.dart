@@ -68,6 +68,6 @@ abstract class BaseStatefulWidgetWithBlocState<
 
   @override
   Widget buildError(BuildContext cntxt, ErrorModel err) {
-    return AppErrorWidget();
+    return AppErrorWidget(err: err);
   }
 }

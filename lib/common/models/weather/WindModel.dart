@@ -3,6 +3,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'WindModel.g.dart';
 
+/**
+ * Model for mapping in OpenWeather api
+ */
 @JsonSerializable(explicitToJson: true)
 class WindModel extends BaseModel {
   @JsonKey(name: "speed")

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
  * Mixin used to abstract screen layout
  */
 mixin ScreenMixin {
-
   static const double SMALL_SPACING = 8.0;
   static const double MID_SPACING = 16.0;
   static const double BIG_SPACING = 32.0;
@@ -18,8 +17,8 @@ mixin ScreenMixin {
 
   /**
    * Builds a widget representing main content of the screen
+   * It is an abstract method so it has to be overriden by children
    */
-  //XXX: must be overriden by subclasses
   Widget buildScreenContents(BuildContext cntxt);
 
   /**
@@ -42,5 +41,8 @@ mixin ScreenMixin {
    */
   String getScreenTitle(BuildContext cntxt);
 
+  /**
+   * Returns flag to show/hide back button on app bar
+   */
   bool leading() => true;
 }

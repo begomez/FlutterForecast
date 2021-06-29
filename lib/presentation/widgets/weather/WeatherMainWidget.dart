@@ -8,9 +8,6 @@ import 'package:flutter_template/presentation/widgets/forecast/ForecastButtonWid
 import 'package:flutter_template/presentation/widgets/town/CityDropdownWidget.dart';
 import 'package:flutter_template/presentation/widgets/weather/CurrentWeatherWidget.dart';
 
-/**
- * Home screen displayed after login
- */
 class WeatherMainWidget extends BaseStatefulWidget {
   final ISOCityModel place;
 
@@ -18,13 +15,13 @@ class WeatherMainWidget extends BaseStatefulWidget {
       : assert(place != null),
         super(key: key);
 
-
   @override
-  BaseStatefulWidgetState<BaseStatefulWidget> createState() => _WeatherMainWidgetState(this.place);
-
+  BaseStatefulWidgetState<BaseStatefulWidget> createState() =>
+      _WeatherMainWidgetState(this.place);
 }
 
-class _WeatherMainWidgetState extends BaseStatefulWidgetState<WeatherMainWidget> {
+class _WeatherMainWidgetState
+    extends BaseStatefulWidgetState<WeatherMainWidget> {
   ISOCityModel _city;
 
   _WeatherMainWidgetState(this._city) : super();
@@ -44,7 +41,11 @@ class _WeatherMainWidgetState extends BaseStatefulWidgetState<WeatherMainWidget>
   }
 
   Widget _buildSelector(BuildContext cntxt) {
-    return CityDropdownWidget(key: ValueKey(this._city.code), place: this._city, selectionCallback: this._onCityUpdated,);
+    return CityDropdownWidget(
+      key: ValueKey(this._city.code),
+      place: this._city,
+      selectionCallback: this._onCityUpdated,
+    );
   }
 
   Widget _buildCurrentWeather(BuildContext cntxt) {
@@ -59,9 +60,9 @@ class _WeatherMainWidgetState extends BaseStatefulWidgetState<WeatherMainWidget>
 
   Widget _buildMainAction(BuildContext cntxt) {
     return ForecastButtonWidget(
-        this._city,
-        onSuccess: this._onSuccess,
-        onError: this._onError,
+      this._city,
+      onSuccess: this._onSuccess,
+      onError: this._onError,
     );
   }
 

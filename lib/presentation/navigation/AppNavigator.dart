@@ -16,10 +16,13 @@ abstract class AppNavigator {
     return Navigator.of(cntxt).pushNamed(Routes.error);
   }
 
-  static Future<void> toForecast(
-      BuildContext cntxt, ISOCityModel place, ForecastListModel forecast) {
-    return Navigator.of(cntxt)
-        .push(MaterialPageRoute(builder: (cntxt) => ForecastScreen(place: place, forecast: forecast,)));
+  static Future<void> toForecast(BuildContext cntxt, ISOCityModel place,
+      ForecastListModel forecast) async {
+    return Navigator.of(cntxt).push(MaterialPageRoute(
+        builder: (cntxt) => ForecastScreen(
+              place: place,
+              forecast: forecast,
+            )));
   }
 
   static Future<void> toCitySelection(BuildContext cntxt) async {
@@ -27,7 +30,7 @@ abstract class AppNavigator {
   }
 
   static Future<void> toMain(BuildContext cntxt, ISOCityModel city) async {
-    return Navigator.of(cntxt)
-        .push(MaterialPageRoute(builder: (cntxt) => WeatherScreen(place: city)));
+    return Navigator.of(cntxt).push(
+        MaterialPageRoute(builder: (cntxt) => WeatherScreen(place: city)));
   }
 }

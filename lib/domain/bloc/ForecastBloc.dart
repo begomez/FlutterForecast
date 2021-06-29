@@ -16,13 +16,13 @@ class ForecastBloc extends BaseBloc<WeatherDTO, ForecastListModel> {
 
   @override
   Future<ForecastListModel> fetchData(WeatherDTO dto) async {
-    final rawData =  await this._repo.getForecasting(dto.settings);
-    
+    final rawData = await this._repo.getForecasting(dto.settings);
+
     return ForecastListModel(this._prepareData(rawData));
   }
 
   /**
-   * Split 24h day forecast into 8 segments of 4 hours by skipping in between vals
+   * Split 24h day forecast into 6 segments of 4 hours by skipping in between vals
    */
   List<ForecastModel> _prepareData(ForecastListModel rawData) {
     final int SEGMENT = 4;

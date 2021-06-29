@@ -6,7 +6,6 @@ import 'package:flutter_template/common/models/weather/ForecastSettingsModel.dar
 import 'package:flutter_template/domain/bloc/CurrentWeatherBloc.dart';
 import 'package:flutter_template/domain/dto/WeatherDTO.dart';
 import 'package:flutter_template/network/api/WeatherApiImpl.dart';
-import 'package:flutter_template/network/fake/FakeWeatherApiImpl.dart';
 import 'package:flutter_template/presentation/widgets/base/BaseStatefulWidgetWithBloc.dart';
 import 'package:flutter_template/presentation/widgets/convenient/AppNoDataWidget.dart';
 import 'package:flutter_template/presentation/widgets/weather/WeatherOverviewCardWidget.dart';
@@ -15,8 +14,7 @@ class CurrentWeatherWidget
     extends BaseStatefulWidgetWithBloc<CurrentWeatherBloc> {
   final ISOCityModel place;
 
-  const CurrentWeatherWidget(
-      {@required this.place, Key key})
+  const CurrentWeatherWidget({@required this.place, Key key})
       : assert(place != null),
         super(key: key);
 

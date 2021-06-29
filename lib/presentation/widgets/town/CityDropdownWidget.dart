@@ -3,20 +3,24 @@ import 'package:flutter_template/common/models/iso/ISOCityListModel.dart';
 import 'package:flutter_template/common/models/iso/ISOCityModel.dart';
 import 'package:flutter_template/domain/bloc/ISOCitiesBloc.dart';
 import 'package:flutter_template/domain/dto/ISOCitiesDTO.dart';
-import 'package:flutter_template/network/fake/FakeISOCitiesApiImpl.dart';
+import 'package:flutter_template/network/fake/FakeISOApiImpl.dart';
 import 'package:flutter_template/presentation/resources/AppColors.dart';
 import 'package:flutter_template/presentation/widgets/base/BaseStatefulWidgetWithBloc.dart';
-import 'package:flutter_template/presentation/widgets/convenient/AppErrorWidget.dart';
 import 'package:flutter_template/presentation/widgets/convenient/AppNoDataWidget.dart';
 
 class CityDropdownWidget extends BaseStatefulWidgetWithBloc<ISOCitiesBloc> {
   final Function(ISOCityModel) selectionCallback;
   final ISOCityModel place;
 
-  const CityDropdownWidget({@required this.selectionCallback, @required this.place, Key key}) : assert(selectionCallback != null), assert(place != null), super(key: key);
+  const CityDropdownWidget(
+      {@required this.selectionCallback, @required this.place, Key key})
+      : assert(selectionCallback != null),
+        assert(place != null),
+        super(key: key);
 
   @override
-  _CityDropdownWidgetState createState() => _CityDropdownWidgetState(this.place);
+  _CityDropdownWidgetState createState() =>
+      _CityDropdownWidgetState(this.place);
 }
 
 class _CityDropdownWidgetState extends BaseStatefulWidgetWithBlocState<
@@ -24,7 +28,7 @@ class _CityDropdownWidgetState extends BaseStatefulWidgetWithBlocState<
   ISOCityModel _selectedPlace;
 
   _CityDropdownWidgetState(this._selectedPlace)
-      : super(autocall: true, bloc: ISOCitiesBloc(FakeISOCitiesApiImpl()));
+      : super(autocall: true, bloc: ISOCitiesBloc(FakeISOApiImpl()));
 
   @override
   Widget buildInitial(BuildContext cntxt) {
@@ -49,20 +53,19 @@ class _CityDropdownWidgetState extends BaseStatefulWidgetWithBlocState<
                 focusColor: AppColors.textColor,
                 icon: Icon(Icons.keyboard_arrow_down),
                 value: this._selectedPlace,
-                items: data.map((ISOCityModel iso) =>
-                    DropdownMenuItem<ISOCityModel>(value: iso, child: Text(iso.name))).toList())),
+                items: data
+                    .map((ISOCityModel iso) => DropdownMenuItem<ISOCityModel>(
+                        value: iso, child: Text(iso.name)))
+                    .toList())),
       );
     }
   }
 
   @override
   ISOCitiesDTO getDTO() => ISOCitiesDTO();
-  
+
   void _onSelectionChange(ISOCityModel city) {
     this.widget.selectionCallback(city);
-    //this.setState(() {
-    //  this._selectedCity = city;
-    //});
   }
 }
 

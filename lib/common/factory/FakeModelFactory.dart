@@ -1,15 +1,16 @@
 import 'dart:math';
 
-import 'package:flutter_template/common/models/UserSessionModel.dart';
 import 'package:flutter_template/common/models/iso/ISOCityModel.dart';
 import 'package:flutter_template/common/models/weather/CountryModel.dart';
-import 'package:flutter_template/common/models/weather/ForecastModel.dart';
 import 'package:flutter_template/common/models/weather/GeolocationModel.dart';
 import 'package:flutter_template/common/models/weather/ForecastSummaryModel.dart';
 import 'package:flutter_template/common/models/weather/HourlyForecastModel.dart';
 import 'package:flutter_template/common/models/weather/WeatherModel.dart';
 import 'package:flutter_template/common/models/weather/WindModel.dart';
 
+/**
+ * Factory for dummy data
+ */
 abstract class FakeModelFactory {
 // GENERAL
 
@@ -18,10 +19,6 @@ abstract class FakeModelFactory {
   static double _randomSpeed() => Random().nextInt(250).toDouble();
 
   static int _randomPercent() => Random().nextInt(100);
-
-  static String _randomUserName() => "WeatherForecaster";
-
-  static String _randomEmail() => "forecaster@protonmail.com";
 
   static String _randomString({int len = 10}) {
     final rand = Random();
@@ -36,23 +33,22 @@ abstract class FakeModelFactory {
   static List<HourlyForecastModel> hourlyForecasts({int num = 24}) =>
       List.generate(num, (index) => _hourlyForecast(index));
 
-  static HourlyForecastModel _hourlyForecast(int pos) =>
-      HourlyForecastModel(
-        weather: [weather()],
-        temp: _randomCelsius(),
-        pressure: _randomPercent(),
-        datetime: DateTime.now().add(Duration(hours: pos)).millisecondsSinceEpoch,
-        humid: _randomPercent(),
-        feeling: _randomCelsius(),
-        clouds: _randomPercent(),
-        deg: _randomPercent(),
-        speed: _randomSpeed(),
-        visibility: _randomPercent(),
-        gust: 0.0,
-        uvi: 0.0
-      );
+  static HourlyForecastModel _hourlyForecast(int pos) => HourlyForecastModel(
+      weather: [weather()],
+      temp: _randomCelsius(),
+      pressure: _randomPercent(),
+      datetime: DateTime.now().add(Duration(hours: pos)).millisecondsSinceEpoch,
+      humid: _randomPercent(),
+      feeling: _randomCelsius(),
+      clouds: _randomPercent(),
+      deg: _randomPercent(),
+      speed: _randomSpeed(),
+      visibility: _randomPercent(),
+      gust: 0.0,
+      uvi: 0.0);
 
-  static WindModel wind() => WindModel(speed: _randomSpeed(), deg: _randomPercent(), gust: 1.0);
+  static WindModel wind() =>
+      WindModel(speed: _randomSpeed(), deg: _randomPercent(), gust: 1.0);
 
   static WeatherModel weather() => WeatherModel(
       description: "A lot of clouds", main: "clouds", icon: "04d", id: 1);
@@ -75,11 +71,6 @@ abstract class FakeModelFactory {
         sunrise: 1568958164,
         sunset: 1568958164,
       );
-
-// SESSION
-
-  static UserSessionModel buildUser() => UserSessionModel(
-      name: _randomUserName(), mail: _randomEmail(), token: _randomString());
 
 // ISO
 

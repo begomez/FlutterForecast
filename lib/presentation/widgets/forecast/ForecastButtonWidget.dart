@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/models/ErrorModel.dart';
-import 'package:flutter_template/common/models/core/BaseModel.dart';
 import 'package:flutter_template/common/models/iso/ISOCityModel.dart';
 import 'package:flutter_template/common/models/weather/ForecastListModel.dart';
 import 'package:flutter_template/common/models/weather/ForecastSettingsModel.dart';
-import 'package:flutter_template/common/models/weather/GeolocationModel.dart';
 import 'package:flutter_template/domain/bloc/ForecastBloc.dart';
-import 'package:flutter_template/domain/bloc/core/BaseBloc.dart';
 import 'package:flutter_template/domain/dto/WeatherDTO.dart';
-import 'package:flutter_template/domain/dto/core/BaseDTO.dart';
 import 'package:flutter_template/network/api/WeatherApiImpl.dart';
-import 'package:flutter_template/network/fake/FakeWeatherApiImpl.dart';
 import 'package:flutter_template/presentation/resources/AppStyles.dart';
 import 'package:flutter_template/presentation/utils/AppLocalizations.dart';
 import 'package:flutter_template/presentation/widgets/base/BaseStatefulWidgetWithBloc.dart';
-import 'package:flutter_template/presentation/widgets/factory/WidgetFactory.dart';
 
 class ForecastButtonWidget extends BaseStatefulWidgetWithBloc<ForecastBloc> {
   ISOCityModel place;

@@ -3,7 +3,7 @@ import 'package:flutter_template/common/models/iso/ISOCityListModel.dart';
 import 'package:flutter_template/common/models/iso/ISOCityModel.dart';
 import 'package:flutter_template/domain/bloc/ISOCitiesBloc.dart';
 import 'package:flutter_template/domain/dto/ISOCitiesDTO.dart';
-import 'package:flutter_template/network/fake/FakeISOCitiesApiImpl.dart';
+import 'package:flutter_template/network/fake/FakeISOApiImpl.dart';
 import 'package:flutter_template/presentation/navigation/AppNavigator.dart';
 import 'package:flutter_template/presentation/resources/AppColors.dart';
 import 'package:flutter_template/presentation/resources/AppStyles.dart';
@@ -11,7 +11,6 @@ import 'package:flutter_template/presentation/widgets/base/BaseStatefulWidgetWit
 import 'package:flutter_template/presentation/widgets/base/BaseStatelessWidget.dart';
 import 'package:flutter_template/presentation/widgets/convenient/AppLoadingWidget.dart';
 import 'package:flutter_template/presentation/widgets/convenient/AppNoDataWidget.dart';
-import 'package:flutter_template/presentation/widgets/factory/WidgetFactory.dart';
 
 class CitySelectionWidget extends BaseStatefulWidgetWithBloc<ISOCitiesBloc> {
   CitySelectionWidget({Key key}) : super(key: key);
@@ -23,7 +22,7 @@ class CitySelectionWidget extends BaseStatefulWidgetWithBloc<ISOCitiesBloc> {
 class _CitySelectionWidgetState extends BaseStatefulWidgetWithBlocState<
     CitySelectionWidget, ISOCitiesBloc, ISOCityListModel, ISOCitiesDTO> {
   _CitySelectionWidgetState()
-      : super(autocall: true, bloc: ISOCitiesBloc(FakeISOCitiesApiImpl()));
+      : super(autocall: true, bloc: ISOCitiesBloc(FakeISOApiImpl()));
 
   @override
   Widget buildInitial(BuildContext cntxt) {
@@ -63,36 +62,36 @@ class CityItemWidget extends BaseStatelessWidget {
   @override
   Widget buildWidgetContents(BuildContext context) {
     return InkWell(
-        splashColor: AppColors.accent,
-        onTap: () async {
-          await AppNavigator.toMain(context, city);
-        },
-        child: Container(
-          padding: EdgeInsets.all(_Dimens.MID_SPACING),
-          width: double.maxFinite,
-          height: MediaQuery.of(context).size.height / 4,
-          child: Stack(
-            children: [
-              Image.network(
-                this.city.img,
-                width: double.maxFinite,
-                height: MediaQuery.of(context).size.height / 4,
-                fit: BoxFit.fitWidth,
-                loadingBuilder: (cntxt, child, progress) {
-                  return (progress == null) ? child : AppLoadingWidget();
-                },
+      splashColor: AppColors.accent,
+      onTap: () async {
+        await AppNavigator.toMain(context, city);
+      },
+      child: Container(
+        padding: EdgeInsets.all(_Dimens.MID_SPACING),
+        width: double.maxFinite,
+        height: MediaQuery.of(context).size.height / 4,
+        child: Stack(
+          children: [
+            Image.network(
+              this.city.img,
+              width: double.maxFinite,
+              height: MediaQuery.of(context).size.height / 4,
+              fit: BoxFit.fitWidth,
+              loadingBuilder: (cntxt, child, progress) {
+                return (progress == null) ? child : AppLoadingWidget();
+              },
+            ),
+            Positioned(
+              bottom: _Dimens.MID_SPACING,
+              right: _Dimens.MID_SPACING,
+              child: Text(
+                city.name,
+                style: AppStyles.title.copyWith(color: AppColors.accent),
               ),
-              Positioned(
-                bottom: _Dimens.MID_SPACING,
-                right: _Dimens.MID_SPACING,
-                child: Text(
-                  city.name,
-                  style: AppStyles.title.copyWith(color: AppColors.accent),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
     );
   }
 }

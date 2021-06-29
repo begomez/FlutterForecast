@@ -12,6 +12,9 @@ import 'package:flutter_template/common/utils/AppDateUtils.dart';
 import 'package:flutter_template/data/api/IWeatherApi.dart';
 import 'package:flutter_template/domain/repo/IWeatherRepository.dart';
 
+/**
+ * Implementation of weather forecast repo
+ */
 class WeatherRepositoryImpl implements IWeatherRepository {
   static final int HOURS_PER_DAY = 24;
   final IWeatherApi _api;
@@ -23,20 +26,23 @@ class WeatherRepositoryImpl implements IWeatherRepository {
       ForecastSettingsModel settings) async {
     final resp = await this._api.getForecastForLoc(settings);
 
-    return ForecastListModel(resp.list.map((e) => ForecastModel(
-        datetime: e.datetime,
-        geo: GeolocationModel(lat: resp.lat, lon: resp.lon),
-        weather: e.weather.isEmpty? WeatherModel() : e.weather[0],
-        country: const CountryModel(),
-        wind: WindModel(speed: e.speed, deg: e.deg, gust: e.gust),
-        summary: ForecastSummaryModel(
-          feeling: e.feeling,
-          humid: e.humid,
-          pressure: e.pressure,
-          temp: e.temp,
-        )
-    )
-    ).toList().sublist(0, min(resp.list.length, HOURS_PER_DAY)).toList());
+    return ForecastListModel(resp.list
+        .map((e) => ForecastModel(
+            datetime: e.datetime,
+            geo: GeolocationModel(lat: resp.lat, lon: resp.lon),
+            weather: e.weather.isEmpty ? WeatherModel() : e.weather[0],
+            country: const CountryModel(),
+            wind: WindModel(speed: e.speed, deg: e.deg, gust: e.gust),
+            summary: ForecastSummaryModel(
+              feeling: e.feeling,
+              humid: e.humid,
+              pressure: e.pressure,
+              temp: e.temp,
+            )))
+        .toList()
+
+        //XXX: provide only a 24h forecast
+        .sublist(0, min(resp.list.length, HOURS_PER_DAY)));
   }
 
   @override

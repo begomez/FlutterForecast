@@ -24,6 +24,9 @@ abstract class BaseBloc<Params extends BaseDTO, Output extends BaseModel> {
 
   BaseBloc();
 
+  /**
+   * Operation execution using params and returning specified model
+   */
   void performOperation(Params dto) async {
     var result;
     try {
@@ -39,16 +42,29 @@ abstract class BaseBloc<Params extends BaseDTO, Output extends BaseModel> {
     }
   }
 
+  /**
+   * Data retrieval performed by specific bloc 
+   * It is an abstract method so it has to be overriden by children
+   */
   Future<Output> fetchData(Params dto);
 
+  /**
+   * Accessor for custom error code for the specific operation
+   */
   int getErrorCode() => ErrorCodes.INVALID;
 
+  /**
+   * Add new event to sink, so it is processed by bloc
+   */
   void processNewEvent(ResourceResult event) {
     if (!this._controller.isClosed) {
       this.input.add(event);
     }
   }
 
+  /**
+   * Free bloc resources
+   */
   void dispose() {
     this.input.close();
 
@@ -57,12 +73,15 @@ abstract class BaseBloc<Params extends BaseDTO, Output extends BaseModel> {
     }
   }
 
+  /**
+   * Wrap operation result on a custom object for consistency and encapsulation
+   */
   ResourceResult<Output> buildResult(
       {Output data, int errorCode = ErrorCodes.INVALID}) {
     ResourceResult<Output> res = ResourceResult(
         data: data, error: errorCode >= 0 ? ErrorModel(code: errorCode) : null);
 
-    res.state = res.hasData() ? ResourceState.SUCCESS : ResourceState.ERROR;
+    res.resState = res.hasData() ? ResourceState.SUCCESS : ResourceState.ERROR;
 
     return res;
   }

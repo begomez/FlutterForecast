@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/presentation/utils/AppLocalizations.dart';
 
+/**
+ * Widget displayed when no data found
+ */
 class AppNoDataWidget extends StatelessWidget {
   const AppNoDataWidget({Key key}) : super(key: key);
 

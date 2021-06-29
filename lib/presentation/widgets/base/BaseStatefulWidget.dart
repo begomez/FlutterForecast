@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /**
  * Base class for widgets with dynamic state that uses NO bloc.
- * If need bloc usage, see BaseStatefulWidgetWithBloc
+ * When needing bloc usage, see BaseStatefulWidgetWithBloc
  */
 abstract class BaseStatefulWidget extends StatefulWidget {
   const BaseStatefulWidget({Key key}) : super(key: key);
@@ -13,6 +13,8 @@ abstract class BaseStatefulWidget extends StatefulWidget {
 
 /**
  * Companion state class
+ * It is a generic class receiving:
+ * - T: widget binded to this state
  */
 abstract class BaseStatefulWidgetState<T extends BaseStatefulWidget>
     extends State<T> {
@@ -25,7 +27,7 @@ abstract class BaseStatefulWidgetState<T extends BaseStatefulWidget>
 
   /**
    * Returns widget content.
-   * Abstract method that has to be overriden by children
+   * It is an abstract method so it has to be overriden by children
    */
   Widget buildWidgetContents(BuildContext context);
 }

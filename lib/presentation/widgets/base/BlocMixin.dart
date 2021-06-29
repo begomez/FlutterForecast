@@ -15,13 +15,15 @@ import 'package:flutter_template/domain/dto/core/BaseDTO.dart';
  */
 mixin BlocMixin<TargetBloc extends BaseBloc, TargetData extends BaseModel,
     TargetDTO extends BaseDTO> {
-  TargetBloc bloc;
-  bool autocall = false;
+  TargetBloc _bloc;
+  bool _autocall = false;
+
+  bool get autocall => this._autocall;
 
   //XXX: must be invoked since mixins have no constructors
   void initMixin({TargetBloc bloc, bool autocall}) {
-    this.bloc = bloc;
-    this.autocall = autocall;
+    this._bloc = bloc;
+    this._autocall = autocall;
   }
 
   /**
@@ -30,14 +32,14 @@ mixin BlocMixin<TargetBloc extends BaseBloc, TargetData extends BaseModel,
   void call() {
     TargetDTO dto = this.getDTO();
 
-    // BLOC initialized...
+    // BLOC initialized
     if (this.hasBloc()) {
       // show loading
-      this.bloc.processNewEvent(
-          ResourceResult<TargetData>(state: ResourceState.LOADING));
+      this._bloc.processNewEvent(
+          ResourceResult<TargetData>(resState: ResourceState.LOADING));
 
       // perform op
-      this.bloc.performOperation(dto);
+      this._bloc.performOperation(dto);
 
       // NO BLOC available
     } else {
@@ -45,7 +47,7 @@ mixin BlocMixin<TargetBloc extends BaseBloc, TargetData extends BaseModel,
     }
   }
 
-  bool hasBloc() => (this.bloc != null);
+  bool hasBloc() => (this._bloc != null);
 
   /**
    * Returns a widget depending on current state
@@ -53,9 +55,9 @@ mixin BlocMixin<TargetBloc extends BaseBloc, TargetData extends BaseModel,
   Widget buildWidgetAccordingToState(BuildContext context) {
     return BlocProvider(
         child: StreamBuilder<ResourceResult<TargetData>>(
-          stream: this.bloc.output,
+          stream: this._bloc.output,
           builder: (context, snap) {
-            switch (snap?.data?.state) {
+            switch (snap?.data?.resState) {
               case ResourceState.LOADING:
                 return this.buildLoading(context);
               case ResourceState.ERROR:
@@ -68,7 +70,7 @@ mixin BlocMixin<TargetBloc extends BaseBloc, TargetData extends BaseModel,
             }
           },
         ),
-        bloc: this.bloc);
+        bloc: this._bloc);
   }
 
   /**

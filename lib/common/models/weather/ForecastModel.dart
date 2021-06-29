@@ -51,7 +51,8 @@ class ForecastModel extends BaseModel {
 
   bool hasCountry() => this._hasProp(this.country);
 
-  String toHourString() => AppDateUtils.millisToHH(AppDateUtils.MILIS_PER_SEC * this.datetime);
+  String toHourString() =>
+      AppDateUtils.millisToHHStr(AppDateUtils.MILIS_PER_SEC * this.datetime);
 
   bool hasImg() => this.weather.hasIcon();
 

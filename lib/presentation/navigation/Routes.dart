@@ -4,5 +4,4 @@ abstract class Routes {
   static final String cities = "/cities";
   static final String main = "/main";
   static final String error = "/error";
-
 }

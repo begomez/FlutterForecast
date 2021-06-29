@@ -2,6 +2,9 @@ import 'package:flutter_template/common/models/iso/ISOCityListModel.dart';
 import 'package:flutter_template/data/api/IISOApi.dart';
 import 'package:flutter_template/domain/repo/IISORepository.dart';
 
+/**
+ * Implementation of ISO city repo
+ */
 class IISORepositoryImpl implements IISORepository {
   final IISOApi _api;
 

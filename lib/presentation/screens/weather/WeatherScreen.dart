@@ -6,7 +6,7 @@ import 'package:flutter_template/presentation/utils/AppLocalizations.dart';
 import 'package:flutter_template/presentation/widgets/weather/WeatherMainWidget.dart';
 
 /**
- * Main screen displayed after city selection
+ * Main screen displayed after city selection showing current weather for selected city
  */
 class WeatherScreen extends BaseStatelessScreen {
   ISOCityModel place;
