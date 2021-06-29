@@ -14,22 +14,21 @@ import Flutter
 
     let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
     let channel = FlutterMethodChannel(name: CHANNEL+SUFFIX, binaryMessenger: controller.binaryMessenger)
-    //DispatchQueue.main.async{
-    channel.setMethodCallHandler({
-      (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
-        //self.flutterResult = result
+    DispatchQueue.main.async{
+      channel.setMethodCallHandler({
+        (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
 
-        if call.method == GET_CURRENT {
-            result(OpenWeatherServiceIOS.getCurrentWeather(appId: "", lat: 0.0, lon: 0.0))
+          if call.method == GET_CURRENT {
+              result(OpenWeatherServiceIOS.getCurrentWeather(appId: "", lat: 0.0, lon: 0.0))
 
-        } else if call.method == GET_FORECAST {
-            result(OpenWeatherServiceIOS.getForecast(appId: "", lat: 0.0, lon: 0.0))
+          } else if call.method == GET_FORECAST {
+              result(OpenWeatherServiceIOS.getForecast(appId: "", lat: 0.0, lon: 0.0))
 
-        } else {
-            result(FlutterMethodNotImplemented)
-        }
-    })
-    //}
+          } else {
+              result(FlutterMethodNotImplemented)
+          }
+      })
+    }
 
     GeneratedPluginRegistrant.register(with: self)
 
